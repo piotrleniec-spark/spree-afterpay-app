@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_07_110308) do
+ActiveRecord::Schema.define(version: 2018_12_07_110714) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -86,6 +86,16 @@ ActiveRecord::Schema.define(version: 2018_12_07_110308) do
     t.index ["eligible"], name: "index_spree_adjustments_on_eligible"
     t.index ["order_id"], name: "index_spree_adjustments_on_order_id"
     t.index ["source_id", "source_type"], name: "index_spree_adjustments_on_source_id_and_source_type"
+  end
+
+  create_table "spree_afterpay_orders", force: :cascade do |t|
+    t.string "token"
+    t.integer "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_spree_afterpay_orders_on_order_id"
+    t.index ["token", "order_id"], name: "index_spree_afterpay_orders_on_token_and_order_id", unique: true
+    t.index ["token"], name: "index_spree_afterpay_orders_on_token"
   end
 
   create_table "spree_assets", force: :cascade do |t|
